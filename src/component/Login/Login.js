@@ -1,15 +1,51 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Button } from 'react-bootstrap';
+import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { Link, useNavigate } from 'react-router-dom';
+import auth from '../../firebase.init';
+import Social from '../Social/Social';
 
 const Login = () => {
+    const [email, setEmail] = useState('')
+    const [pass, setPass] = useState('')
+    const navigate = useNavigate();
+
+    const [
+        signInWithEmailAndPassword,
+        user,
+        loading,
+        error,
+    ] = useSignInWithEmailAndPassword(auth);
+
+    if (user) {
+        navigate('/home')
+    }
+
+    const handleEmailBlur = e => {
+        setEmail(e.target.value)
+    }
+    const handlePasswordBlur = e => {
+        setPass(e.target.value);
+    }
+
+
+    const submitform = e => {
+        e.preventDefault()
+        signInWithEmailAndPassword(email, pass)
+    }
+
     return (
         <div>
             <h2 className='mt-4' style={{ color: 'purple' }}> Please Login</h2>
-            <form className='register mt-4'>
-                <input className='mb-3' type="email" name="email" id="" placeholder='Enter your Email' required />
-                <input className='mb-3' type="password" name="password" id="" placeholder='Password' required />
-                <p className='mt-2'>Have an account? <Link to='/register'>Register</Link></p>
+            <form onSubmit={submitform} className='register mt-4'>
+                <input onBlur={handleEmailBlur} className='mb-3' type="email" name="email" id="" placeholder='Enter your Email' required />
+                <input onBlur={handlePasswordBlur} className='mb-3' type="password" name="password" id="" placeholder='Password' required />
+                <Button variant="primary  mx-auto d-block mb-4 mt-3" type="submit">
+                    login
+                </Button>
+                <p className='mt-2'>New to Our website? <Link to='/register'>Register</Link></p>
             </form>
+            <Social></Social>
         </div>
     );
 };
