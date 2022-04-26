@@ -19,7 +19,7 @@ const Header = () => {
             {
                 user
                     ?
-                    <button style={{ fontSize: '20px' }} className='border-0 bg-white px-3 ' onClick={handleSignOut}>Log Out</button>
+                    <button style={{ fontSize: '20px' }} className='border-0 bg-white px-3 logOut' onClick={handleSignOut}>Log Out</button>
                     :
                     <Link to='/login'>Login</Link>
             }
