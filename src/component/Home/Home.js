@@ -5,7 +5,7 @@ import './Home.css';
 const Home = () => {
     const [voluenteers, setVoluenteers] = useState([])
     useEffect(() => {
-        fetch('volenteer.json')
+        fetch('http://localhost:5000/data')
             .then(res => res.json())
             .then(data => setVoluenteers(data))
     }, [])
@@ -15,7 +15,7 @@ const Home = () => {
                 {
                     voluenteers.map(voluenteer =>
                         <Volenteer
-                            key={voluenteer.id}
+                            key={voluenteer._id}
                             voluenteer={voluenteer}
                         >
 

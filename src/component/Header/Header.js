@@ -15,6 +15,8 @@ const Header = () => {
         <div className='nav-link'>
             <Link to='/home'>Home</Link>
             <Link to='/VolenteerRegister'>VolenteerRegister</Link>
+            <Link to='/add'>Add</Link>
+            <Link to='/delete'>Delete</Link>
             <Link to='/register'>Register</Link>
             {
                 user
